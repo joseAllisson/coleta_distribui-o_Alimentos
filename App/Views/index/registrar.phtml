@@ -1,0 +1,66 @@
+<header class="row m-auto align-items-center justify-content-center bg-register">
+  <section class="py-4 px-md-5 px-4 m-auto registration-panel">
+    <h2 class=" text-center mt-2 cor-p">Cadastre-se entregador</h2>
+    <form action="/registraEntregador" method="post">
+
+      <div class="row">
+        <div class="col-sm-6 mt-4">
+          <label>Nome</label>
+          <input type="text" name="nome" value="<?= $this->view->usuario['nome'] ?>" class="form-custom form-control mt-1" size="60" maxlength="60" placeholder="Nome" required>
+        </div>
+        <div class="col-sm-6 mt-4">
+          <label>CPF</label>
+          <input type="text" name="cpf" value="<?= $this->view->usuario['cpf'] ?>" class="form-custom form-control mt-1" size="20" maxlength="20" placeholder="CPF" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 mt-4">
+          <label>Telefone</label>
+          <input type="text" name="telefone" value="<?= $this->view->usuario['telefone'] ?>" class="form-custom form-control mt-1" size="60" maxlength="60" placeholder="telefone" required>
+        </div>
+        <div class="col-sm-6 mt-4">
+          <label>E-mail</label>
+          <input type="email" name="email" value="<?= $this->view->usuario['email'] ?>" class="form-custom form-control mt-1" size="60" maxlength="60" placeholder="E-mail" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 mt-4">
+          <label>Senha</label>
+          <input type="password" name="senha" value="<?= $this->view->usuario['senha'] ?>" class="form-custom form-control mt-1" size="60" maxlength="15" placeholder="Senha" required>
+        </div>
+        <div class="col-sm-6 mt-4 mb-2">
+          <label>Confirmar senha</label>
+          <input type="password" name="confirmar_senha" value="<?= $this->view->usuario['confirmar_senha'] ?>" class="form-custom form-control mt-1" size="60" maxlength="15" placeholder="Confirmar senha" required>
+        </div>
+      </div>
+
+      <!-- <div class="mt-4">
+        <label class="text-dark d-block">Nível de acesso</label>
+        <div class="custom-control custom-radio d-inline-block mt-2">
+          <label class="custom-control-label text-dark" for="entregador">Entregador</label>
+          <input type="radio" class="custom-control-input" id="entregador" value="entregador" name="nivel" required>
+        </div>
+        <div class="custom-control custom-radio d-inline-block mt-2 ml-3">
+          <label class="custom-control-label text-dark" for="Empresa">Empresa</label>
+          <input type="radio" class="custom-control-input" id="Empresa" value="Empresa" name="nivel" required>
+        </div>
+      </div> -->
+      <button type="submit" class="btn btn-register text-white w-100 mt-4">Cadastrar</button>
+
+      <?php if (empty($this->view->erroCadastroDados)) { ?>
+      <?php } else if ($this->view->erroCadastroDados == 1) { ?>
+        <small class="form-text text-danger">Erro ao tentar realizar o cadastro, verifique se os campos foram preenchidos corretamente.</small>
+      <?php } else if ($this->view->erroCadastroDados == 2) { ?>
+        <small class="form-text text-danger">As senhas não correspondem, digite senhas iguais.</small>
+      <?php } else if ($this->view->erroCadastroDados == 3) { ?>
+        <small class="form-text text-danger">Parece que um usuário ja possui este CPF, digite um CPF Válido ou realize o login.</small>
+      <?php } else if ($this->view->erroCadastroDados == 4) { ?>
+        <small class="form-text text-danger">Este e-mail ja está sendo utilizado, cadastre outro e-mail.</small>
+      <?php } ?>
+
+      <a href="login" class="mt-2 d-block">Ja possui cadastro? realize o login</a>
+    </form>
+  </section>
+</header>

@@ -1,0 +1,44 @@
+
+.usuario{
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.267);
+}
+
+.btn:focus{
+    box-shadow: none!important;
+}
+
+.btn-add{
+    color:white;
+    background-color: #c2121f;
+    padding: 20px;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.267);
+}
+.btn-add:hover{
+    background-color: #7e0c14;
+}
+.box-b{
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.267);
+}
+
+.card{
+    max-width: 18rem
+}
+
+.produtos{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.tab-content{
+    border: 1px solid #c7c7c761;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.13);
+}
+
+@media(max-width:767px){
+    .card{
+        max-width: 100%;
+    }
+}

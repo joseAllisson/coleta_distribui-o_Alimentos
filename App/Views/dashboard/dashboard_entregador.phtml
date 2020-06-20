@@ -1,0 +1,94 @@
+<div class="Container-fluid">
+    <div class="col-12 mt-4">
+        <div class="row">
+            <div class="usuario col-md-4 bg-white">
+                <h5><?= $_SESSION['email'] ?></h5>
+                <div class="information ">
+                    Total de entregas :<?= count($this->view->entregas); ?>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- produtos -->
+        <div class="col mt-4">
+            <div class="container-fluid">
+                <!-- menu js -->
+                <ul class="nav nav-tabs " id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Perfil</a>
+                    </li>
+                </ul>
+
+
+                <div class="tab-content" id="myTabContent">
+
+                    <!-- Entregas totais -->
+                    <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="pesquisa d-flex justify-content-center align-items-center pt-4">
+                            <div class="form-group input-group col" style="max-width: 800px;">
+
+                                <label class="btn"><i class="fa fa-search" aria-hidden="true"></i></label>
+                                <input name="consulta" id="txt_consulta" placeholder="Consultar" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="produtos w-100 row p-0">
+
+                            <?php foreach ($this->view->entregas as $p) { ?>
+                                <!-- cards -->
+
+                                <div class="card col-md-3 my-4 ml-2 box-b" id="produtos">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <img class="card-img-top" src="img/produtos/<?= $p['img'] ?>" alt="img" style="width:200px;height:200px">
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="bold"><?= $p['nome'] ?></h>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">local de entrega: <?= $p['local_coleta'] ?></li>
+                                        <li class="list-group-item">validade: <?= date('d/m/Y', strtotime($p['data_validade'])) ?></li>
+                                        <li class="list-group-item">Status:
+                                            <?php if ($p['id_status'] == 0) {
+                                                echo "Pendente";
+                                            } else {
+                                                echo "Concluído";
+                                            } ?>
+                                        </li>
+                                    </ul>
+                                    <div class="card-body row">
+                                        <?php if ($p['id_status'] == 0) { ?>
+                                            <a href="escolha-<?= $p['id_alimento'] ?>" class="btn btn-ent text-light col-sm">Entregar</a>
+                                        <?php }?>
+
+                                        <a href="entregar?id=<?= $p['id_alimento'] ?>" class="btn btn-success text-light col-sm">Concluído</a>
+                                    </div>
+                                </div>
+
+
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <!-- Entregas escolhidas -->
+                    <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="pesquisa d-flex justify-content-center align-items-center pt-4">
+                            <div class="form-group input-group col" style="max-width: 800px;">
+
+                                <label class="btn"><i class="fa fa-search" aria-hidden="true"></i></label>
+                                <input name="consulta" id="txt_consulta_escolha" placeholder="Consultar" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

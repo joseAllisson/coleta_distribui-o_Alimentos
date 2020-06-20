@@ -1,0 +1,52 @@
+<header class="row m-auto align-items-center justify-content-center bg-register">
+    <section class="py-4 px-md-5 px-4 m-auto registration-panel">
+        <h2 class=" text-center mt-2 cor-p">Cadastrar empresa/negócio</h2>
+        <form action="/registraEmpresa" method="post">
+
+            <div class="row">
+                <div class="col-sm-6 mt-4">
+                    <label>Nome da empresa/negocio</label>
+                    <input type="text" name="nome" value="<?= $this->view->usuario['nome'] ?>" class="form-custom form-control mt-1" size="60" maxlength="60" placeholder="Nome" required>
+                </div>
+                <div class="col-sm-6 mt-4">
+                    <label>Telefone</label>
+                    <input type="text" name="telefone" value="<?= $this->view->usuario['telefone'] ?>" class="form-custom form-control mt-1" size="60" maxlength="60" placeholder="telefone" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm mt-4">
+                    <label>E-mail</label>
+                    <input type="email" name="email" value="<?= $this->view->usuario['email'] ?>" class="form-custom form-control mt-1" size="60" maxlength="60" placeholder="E-mail" required>
+                    <small id="emailHelp" class="form-text text-muted">Usado para login</small>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 mt-4">
+                    <label>Senha</label>
+                    <input type="password" name="senha" value="<?= $this->view->usuario['senha'] ?>" class="form-custom form-control mt-1" size="60" maxlength="15" placeholder="Senha" required>
+                </div>
+                <div class="col-sm-6 mt-4 mb-2">
+                    <label>Confirmar senha</label>
+                    <input type="password" name="confirmar_senha" value="<?= $this->view->usuario['confirmar_senha'] ?>" class="form-custom form-control mt-1" size="60" maxlength="15" placeholder="Confirmar senha" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-register text-white w-100 mt-4">Cadastrar</button>
+
+            <?php if (empty($this->view->erroCadastroDados)) { ?>
+            <?php } else if ($this->view->erroCadastroDados == 1) { ?>
+                <small class="form-text text-danger">Erro ao tentar realizar o cadastro, verifique se os campos foram preenchidos corretamente.</small>
+            <?php } else if ($this->view->erroCadastroDados == 2) { ?>
+                <small class="form-text text-danger">As senhas não correspondem, digite senhas iguais.</small>
+            <?php } else if ($this->view->erroCadastroDados == 3) { ?>
+                <small class="form-text text-danger">Parece que um usuário ja possui este CPF, digite um CPF Válido ou realize o login.</small>
+            <?php } else if ($this->view->erroCadastroDados == 4) { ?>
+                <small class="form-text text-danger">Este e-mail ja está sendo utilizado, cadastre outro e-mail.</small>
+            <?php } ?>
+
+            <a href="login" class="mt-2 d-block">Ja possui cadastro? realize o login</a>
+        </form>
+    </section>
+</header>

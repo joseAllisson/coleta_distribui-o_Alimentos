@@ -1,0 +1,54 @@
+/*Página login.phtml*/
+.panel-img{
+    background: url('../img/bg/contato.png') center no-repeat;
+    background-size:cover;
+    min-height: 100vh; 
+}
+.panel-login{
+    height: 100vh;
+}
+
+/*Página register.phtml*/
+.bg-register{
+    background: url('../img/bg/form.png') center no-repeat;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: darken;
+    background-size:cover;
+    min-height: 100vh;
+}
+.registration-panel{
+    background-color: #FFFFFF;
+    width: 35rem;
+    box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.288);
+}
+@media(max-width:552px){
+    .bg-register{
+        background: #FFFFFF;
+    }
+}
+.btn-register{
+    background: linear-gradient(20deg, rgb(243, 148, 84),rgb(245, 34, 34));
+}
+/*Formulário, inputs e botão*/
+.form-custom{
+    margin-top: 15px;
+    border-radius: 8px;
+    transition: all .3s ease-out;
+}
+.row {
+    padding: 0!important;
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+
+@media(max-width:1200px){
+    .panel-login{
+        background: url('../img/bg/contato.png') center no-repeat;
+    }
+    .title{
+        color: #111 !important;
+    }
+    .form-custom{
+        background-color: white!important;
+    }
+}
