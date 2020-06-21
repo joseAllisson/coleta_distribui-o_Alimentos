@@ -37,6 +37,20 @@
     box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.13);
 }
 
+.altera {
+    background-color: #c2121f;
+}
+
+.altera:hover {
+    background-color: #7e0c14;
+}
+.nav-link{
+    color: white;
+}
+.nav-link:hover{
+    color: white;
+}
+
 @media(max-width:767px){
     .card{
         max-width: 100%;

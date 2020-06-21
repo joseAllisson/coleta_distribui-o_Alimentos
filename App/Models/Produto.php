@@ -7,6 +7,7 @@ use PDO;
 class Produto extends Model{
 
     private $id;
+    private $fk;
     private $nome;
     private $data_validade;
     private $img;
@@ -54,7 +55,10 @@ class Produto extends Model{
     }
 
     public function pegaTodosProdutos(){
-        $stmt = $this->db->prepare("SELECT * FROM alimentos");
+        // as a
+        //     left join area_entregador as st on (a.id_alimento = st.fk_alimento)
+        // where
+        $stmt = $this->db->prepare("SELECT * FROM alimentos AS a LEFT JOIN empresas AS e ON (a.fk_empresa = e.id_empresa)");
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -77,7 +81,57 @@ class Produto extends Model{
     }
 
     public function entregar(){
+        $stmt = $this->db->prepare("INSERT INTO area_entregador(fk_entregador, fk_alimento) values(:id, :fk)");
+        $stmt->bindValue(":id", $this->id);
+        $stmt->bindValue(":fk", $this->fk);
+        $stmt->execute();
+
+        return $this;
         
+    }
+
+    public function area_entregador(){
+        $stmt = $this->db->prepare("SELECT *
+        from 
+            alimentos as a
+            left join area_entregador as st on (a.id_alimento = st.fk_alimento)
+        where
+            st.fk_entregador = :id");
+        $stmt->bindValue(":id", $this->id);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function verificarEntrega(){
+        $stmt = $this->db->prepare("SELECT * FROM area_entregador WHERE fk_entregador = :id AND fk_alimento = :fk");
+        $stmt->bindValue(":id", $this->id);
+        $stmt->bindValue(":fk", $this->fk);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            return false;
+        }else {
+            return true;
+        }
+       
+    }
+
+    public function concluido(){
+        $stmt = $this->db->prepare("UPDATE alimentos set id_status = 1  WHERE id_alimento = :id");
+        $stmt->bindValue(":id", $this->id);
+        $stmt->execute();
+
+        return $this;
+    }
+
+    public function removerEntrega(){
+        $stmt = $this->db->prepare("DELETE FROM area_entregador WHERE fk_alimento = :fk AND fk_entregador = :id");
+        $stmt->bindValue(":id", $this->id);
+        $stmt->bindValue(":fk", $this->fk);
+        $stmt->execute();
+
+        return $this;
     }
 
 }

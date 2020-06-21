@@ -27,7 +27,10 @@ class DashboardController extends Action
         } else {
 
             $produto = Container::getModel('Produto');
+
             $this->view->entregas = $produto->pegaTodosProdutos();
+            $produto->id = $_SESSION['id'];
+            $this->view->area = $produto->area_entregador();
             
             $this->render('dashboard_entregador', "dash_entregador");
         }
@@ -67,9 +70,9 @@ class DashboardController extends Action
             $produto->id = $_GET['id'];
             $produto->excluirProduto();
 
-            echo "<script>alert('Registro excluido com sucesso!')</script>";
+            echo "<script>alert('produto excluido com sucesso!')</script>";
         } else {
-            echo "<script>alert('Selecione um registro para continuar!')</script>";
+            echo "<script>alert('Selecione um produto para continuar!')</script>";
         }
         echo "<script> location.href = '/dashboard' </script>";
     }
@@ -96,9 +99,9 @@ class DashboardController extends Action
             $produto->img = $novo_nome;
             
             if($produto->editaProduto()){
-                echo "<script>alert('Registro editado com sucesso!')</script>";
+                echo "<script>alert('produto editado com sucesso!')</script>";
             }else{
-                echo "<script>alert('Registro não atualizou!')</script>";
+                echo "<script>alert('produto não atualizou!')</script>";
             }
             
         } else {
@@ -110,13 +113,54 @@ class DashboardController extends Action
     public function entregar(){
         $this->validaAutenticacao();
         
+        $produto = Container::getModel('Produto');
 
-        header('Location: /dashboard?entregar=ok');
+        $produto->id = $_SESSION['id'];
+        $produto->fk = $_GET['id'];
+        if ($produto->verificarEntrega()) {
+            if ($produto->entregar()) {
+                echo "<script>alert('Adicionado na demanda com sucesso!!')</script>";
+                echo "<script> location.href = '/dashboard' </script>";
+            }else{
+                echo "<script>alert('Ops!Erro ao adicionar!')</script>";
+                echo "<script> location.href = '/dashboard' </script>";
+            }
+        }else {
+            echo "<script>alert('Item já foi adicionado!')</script>";
+        }
+        
+        
+
+        echo "<script> location.href = '/dashboard' </script>";
     }
 
+    public function concluido(){
+        $this->validaAutenticacao();
 
+        $produto = Container::getModel('Produto');
+        $produto->id = $_GET['id'];
 
+        $produto->concluido();
+        echo "<script>alert('Entrega realizada com sucesso!')</script>";
+        echo "<script> location.href = '/dashboard' </script>";
 
+    }
+
+    public function removerEntrega(){
+        $this->validaAutenticacao();
+
+        if (isset($_GET['id'])) {
+            $produto = Container::getModel('Produto');
+            $produto->id = $_SESSION['id'];
+            $produto->fk = $_GET['id'];
+            $produto->removerEntrega();
+
+            echo "<script>alert('Produto retirado da demanda com sucesso!')</script>";
+        } else {
+            echo "<script>alert('Selecione um produto para continuar!')</script>";
+        }
+        echo "<script> location.href = '/dashboard' </script>";
+    }
 
 
 }

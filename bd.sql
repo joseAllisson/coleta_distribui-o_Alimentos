@@ -34,14 +34,7 @@ create table area_entregador (
     id_area_entregador int primary key AUTO_INCREMENT not null,
 	fk_alimento int not null,
 	fk_entregador int not null,
-    foreign key(fk_alimento) references alimentos(id_alimento)
-	foreign key(fk_entregador) references entregadores(id_entregador)
+    foreign key(fk_alimento) references alimentos(id_alimento)on delete cascade,
+	foreign key(fk_entregador) references entregadores(id_entregador)on delete cascade
 )
 
--- create table usuarios(
--- 	id_usuario int primary key AUTO_INCREMENT not null,
--- 	fk_entregador int not null,
--- 	fk_empresa int not null,
--- 	foreign key(fk_entregador) references entregadores(id_entregador) on delete cascade,
--- 	foreign key(fk_empresa) references empresas(id_empresa) on delete cascade
--- );

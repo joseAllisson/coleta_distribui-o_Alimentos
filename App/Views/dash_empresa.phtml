@@ -39,12 +39,15 @@
 	</div>
 
 	<?= $this->content() ?>
-	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.js"></script>
-
+	<script src="libs/jquery/jquery.mask.min.js"></script>
 	<script>
 		$('input#txt_consulta').quicksearch('div#produtos');
+
+		$("#validade").mask("99/99/9999");
+
 	</script>
 </body>
 

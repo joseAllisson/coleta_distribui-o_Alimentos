@@ -1,26 +1,45 @@
 <div class="Container-fluid">
-    <div class="col-12 mt-4">
-        <div class="row">
-            <div class="usuario col-md-4 bg-white">
-                <h5><?= $_SESSION['email'] ?></h5>
-                <div class="information ">
-                    produtos: <?= count($this->view->empresa) ?>
+    <div class=" mt-4">
+        <div class="col-12">
+            <div class="row">
+                <div class="usuario col-md-4 bg-white">
+                    <h5><?= $_SESSION['email'] ?></h5>
+                    <hr>
+                    <div class="information ">
+                        Total de produtos: <?= count($this->view->empresa) ?>
+                    </div>
+                    <div class="information">
+                        Pendentes:
+                        <?php
+                        $pendente = array();
+                        $concluido = array();
+                        foreach ($this->view->empresa as $e) {
+                            if ($e['id_status'] == 0) {
+                                array_push($pendente, $e['id_status']);
+                            } else {
+                                array_push($concluido, $e['id_status']);
+                            }
+                        }
+                        echo count($pendente);
+                        echo "<br>Concluídos:" . count($concluido); ?>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-8">
-                <div class="py-3">
-                    <button class="btn btn-add w-100" data-toggle="modal" data-target="#form-modal">Adicionar Produto</button>
+                <div class="col-md-8">
+                    <div class="py-3">
+                        <button class="btn btn-add w-100" data-toggle="modal" data-target="#form-modal">Adicionar Produto</button>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
+
         <!-- produtos -->
         <div class="col mt-4">
             <div class="container">
                 <div class="pesquisa">
                     <div class="form-group input-group">
-        
+
                         <label class="btn"><i class="fa fa-search" aria-hidden="true"></i></label>
                         <input name="consulta" id="txt_consulta" placeholder="Consultar" type="text" class="form-control">
                     </div>
@@ -82,7 +101,7 @@
 
                                                 <div class="label-float mt-3">
                                                     <label>Data de validade</label>
-                                                    <input type="Date" value="<?= $p['data_validade'] ?>" name="validade" class="form-control" required>
+                                                    <input type="date" value="<?= $p['data_validade'] ?>" name="validade" class="form-control" required>
                                                 </div>
 
                                                 <div class="label-float mt-3">
@@ -131,12 +150,12 @@
 
                         <div class="label-float mt-3">
                             <label>Local de entrega</label>
-                            <input type="text" name="local" class=" form-control" size="90" placeholder="Local de entrega" required>
+                            <input type="text" id="local" name="local" class=" form-control" size="90" placeholder="Local de entrega" required>
                         </div>
 
                         <div class="label-float mt-3">
                             <label>Data de validade</label>
-                            <input type="Date" name="validade" class="form-control" required>
+                            <input type="text" placeholder="validade" id="validade" name="validade" class="form-control" required>
                         </div>
 
                         <div class="label-float mt-3">

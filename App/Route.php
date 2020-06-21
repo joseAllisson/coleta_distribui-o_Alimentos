@@ -80,6 +80,16 @@ class Route extends Bootstrap
 			'controller' => 'DashboardController',
 			'action' => 'entregar'
 		);
+		$routes['concluido'] = array(
+			'route' => '/concluido',
+			'controller' => 'DashboardController',
+			'action' => 'concluido'
+		);
+		$routes['remover_entrega'] = array(
+			'route' => '/remover_entrega',
+			'controller' => 'DashboardController',
+			'action' => 'removerEntrega'
+		);
 		$this->setRoutes($routes);
 	}
 }
