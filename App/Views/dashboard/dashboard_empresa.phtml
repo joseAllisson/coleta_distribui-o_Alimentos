@@ -69,7 +69,7 @@
                             </ul>
                             <div class="card-body row">
                                 <a data-toggle="modal" data-target="#modal-edit-<?= $p['id_alimento'] ?>" class="btn btn-primary text-light col-md">Editar</a>
-                                <a onclick="excluir('<?= $p['id_alimento'] ?>', '<?= $p['nome'] ?>')"  class="btn btn-danger col-md text-light">Excluir</a>
+                                <a onclick="excluir('<?= $p['id_alimento'] ?>', '<?= $p['nome'] ?>')" class="btn btn-danger col-md text-light">Excluir</a>
                             </div>
                         </div>
 
@@ -107,6 +107,7 @@
                                                 <div class="label-float mt-3">
                                                     <label>Imagem do produto</label>
                                                     <input class="form-control-file" type="file" name="img" value="<?= $p['img'] ?>" required>
+                                                    <small id="emailHelp" class="form-text text-muted">Somente imagens PNG e JPG, recomendado 300px</small>
                                                 </div>
 
                                                 <input type="hidden" name="id" value="<?= $p['id_alimento'] ?>">
@@ -161,6 +162,8 @@
                         <div class="label-float mt-3">
                             <label>Imagem do produto</label>
                             <input class="form-control" type="file" name="img" id="img" required>
+                            <small id="emailHelp" class="form-text text-muted">Somente imagens PNG e JPG, recomendado 300 x 300</small>
+
                         </div>
 
                         <input type="hidden" name="id" value="<?= $_SESSION['id'] ?>">
@@ -176,11 +179,11 @@
 <!-- excluir_produto?id= -->
 
 <script>
-		function excluir(id, nome) {
-			var produto = nome;
-			var teste = confirm('Deseja realmente excluir ' + produto + " dos produtos?");
-			if (teste) {
-				location.href = "excluir_produto?id=" + id;
-			}
-		}
-	</script>
+    function excluir(id, nome) {
+        var produto = nome;
+        var teste = confirm('Deseja realmente excluir ' + produto + " dos produtos?");
+        if (teste) {
+            location.href = "excluir_produto?id=" + id;
+        }
+    }
+</script>
