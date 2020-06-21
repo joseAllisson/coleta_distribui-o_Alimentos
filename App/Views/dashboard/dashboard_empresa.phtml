@@ -69,7 +69,7 @@
                             </ul>
                             <div class="card-body row">
                                 <a data-toggle="modal" data-target="#modal-edit-<?= $p['id_alimento'] ?>" class="btn btn-primary text-light col-md">Editar</a>
-                                <a href="excluir_produto?id=<?= $p['id_alimento'] ?>" class="btn btn-danger col-md">Excluir</a>
+                                <a onclick="excluir('<?= $p['id_alimento'] ?>', '<?= $p['nome'] ?>')"  class="btn btn-danger col-md text-light">Excluir</a>
                             </div>
                         </div>
 
@@ -173,3 +173,14 @@
         </div>
     </div>
 </div>
+<!-- excluir_produto?id= -->
+
+<script>
+		function excluir(id, nome) {
+			var produto = nome;
+			var teste = confirm('Deseja realmente excluir ' + produto + " dos produtos?");
+			if (teste) {
+				location.href = "excluir_produto?id=" + id;
+			}
+		}
+	</script>

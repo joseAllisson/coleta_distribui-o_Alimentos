@@ -115,7 +115,7 @@
                                         <?php if ($p['id_status'] == 0) { ?>
                                             <a href="concluido?id=<?= $p['id_alimento'] ?>" class="btn btn-success text-light col-sm">Concluído</a>
                                         <?php } ?>
-                                        <a href="remover_entrega?id=<?= $p['id_alimento'] ?>" class="btn btn-danger text-light col-sm">Remover</a>
+                                        <a  onclick="excluir('<?= $p['id_alimento'] ?>', '<?= $p['nome'] ?>')" class="btn btn-danger text-light col-sm">Remover</a>
                                     </div>
                                 </div>
 
@@ -133,3 +133,12 @@
 
     </div>
 </div>
+
+<script>
+    function excluir(id, nome){
+        var teste = confirm('Deseja realmente remover ' + nome + " da demanda?");
+        if (teste) {
+            location.href = "remover_entrega?id=" + id;
+        }
+    }
+</script>
