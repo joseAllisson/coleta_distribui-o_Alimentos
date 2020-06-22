@@ -50,8 +50,8 @@
                         <!-- cards -->
 
                         <div class="card col-md-4 my-4 ml-2 box-b" id="produtos">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <img class="card-img-top" src="img/produtos/<?= $p['img'] ?>" alt="img" style="width:200px;height:200px">
+                            <div class="d-flex justify-content-center align-items-center mt-2">
+                                <img class="card-img-top" src="img/produtos/<?= $p['img'] ?>" alt="img" style="min-height:300px;max-height:300px">
                             </div>
                             <div class="card-body">
                                 <h6 class="bold"><?= $p['nome'] ?></h>
@@ -84,10 +84,10 @@
                                         </button>
                                     </div>
                                     <form action="/edita_produto" method="post" enctype="multipart/form-data">
-                                        <div class="modal-body py-4">
+                                        <div class="modal-body py-2">
                                             <div class=" card-body border-0 pt-0">
-                                                <div class="d-flex justify-content-center ">
-                                                    <img src="img/produtos/<?= $p['img'] ?>" alt="edit" style="max-width: 150px;border-radius:100%">
+                                                <div class="d-flex justify-content-center py-2">
+                                                    <img src="img/produtos/<?= $p['img'] ?>" alt="edit" style="min-height:150px;max-height:150px">
                                                 </div>
                                                 <div class="label-float">
                                                     <label>Nome do produto</label>
@@ -101,7 +101,7 @@
 
                                                 <div class="label-float mt-3">
                                                     <label>Data de validade</label>
-                                                    <input type="date" value="<?= $p['data_validade'] ?>" name="validade" class="form-control" required>
+                                                    <input type="date" min="2020-01-01" max="9999-01-01" value="<?= $p['data_validade'] ?>" name="validade" class="form-control" required>
                                                 </div>
 
                                                 <div class="label-float mt-3">
@@ -156,7 +156,7 @@
 
                         <div class="label-float mt-3">
                             <label>Data de validade</label>
-                            <input type="text" placeholder="validade" id="validade" name="validade" class="form-control" required>
+                            <input type="date" min="2020-01-01" max="9999-01-01" name="validade" class="form-control" required>
                         </div>
 
                         <div class="label-float mt-3">

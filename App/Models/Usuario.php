@@ -48,8 +48,10 @@ class Usuario extends Model{
 
         if($stmt->rowCount() > 0){
             return false;
+        }else {
+            return true;
         }
-        return true;
+        
     }
 
     public function registraEntregador(){
@@ -132,8 +134,9 @@ class Usuario extends Model{
 
         if($stmt->rowCount() > 0){
             return false;
-        }else {
-            return true;
+        }{
+           return true; 
         }
+        
     }
 }

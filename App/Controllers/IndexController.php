@@ -53,10 +53,11 @@ class IndexController extends Action {
 		$usuario->email = $_POST['email'];
 		$usuario->senha = md5($_POST['senha']);
 
-		if($usuario->validaRegistroEmpresa() && $usuario->verificadorEmpresa() && $_POST['senha'] == $_POST['confirmar_senha']){
+		if($usuario->validaRegistroEmpresa() && $usuario->dadosEmailEntregador() && $usuario->verificadorEmpresa() && $_POST['senha'] == $_POST['confirmar_senha']){
 		 	$usuario->registraEmpresa();
 			
-			header('Location: /login?cadastro=ok');
+			 echo "<script>alert('Cadastrado com sucesso! faça login')</script>";
+			 echo "<script> location.href = '/login' </script>";
 		}
 		else{
 			$this->view->usuario = [
@@ -92,10 +93,11 @@ class IndexController extends Action {
 		$usuario->email = $_POST['email'];
 		$usuario->senha = md5($_POST['senha']);
 
-		if($usuario->validaRegistro() && $usuario->pegaDadosCpf() && $usuario->dadosEmailEntregador() && $_POST['senha'] == $_POST['confirmar_senha']){
+		if($usuario->validaRegistro() && $usuario->verificadorEmpresa() && $usuario->pegaDadosCpf() && $usuario->dadosEmailEntregador() && $_POST['senha'] == $_POST['confirmar_senha']){
 		 	$usuario->registraEntregador();
 			
-			header('Location: /login?cadastro=ok');
+			 echo "<script>alert('Cadastrado com sucesso! faça login')</script>";
+			 echo "<script> location.href = '/login' </script>";
 		}
 		else{
 			$this->view->usuario = [

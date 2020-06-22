@@ -55,9 +55,11 @@ class DashboardController extends Action
 
 
         if ($usuario->registraProduto()) {
-            header('Location: /dashboard?cadastro=ok');
+            echo "<script>alert('Produto cadastrado com sucesso!')</script>";
+            echo "<script> location.href = '/dashboard' </script>";
         } else {
-            header('Location: /dashboard?erro=ok');
+            echo "<script>alert('Ops! Ocorreu um erro!')</script>";
+            echo "<script> location.href = '/dashboard' </script>";
         }
     }
 
