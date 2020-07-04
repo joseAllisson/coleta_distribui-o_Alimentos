@@ -53,12 +53,26 @@ class Produto extends Model{
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function pegaProdutosEmpresaPorPagina($limit, $offset){
+        $stmt = $this->db->prepare("SELECT * FROM alimentos where fk_empresa = :id limit $limit offset $offset");
+        $stmt->bindValue(":id", $this->id);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function pegaTodosProdutos(){
         // as a
         //     left join area_entregador as st on (a.id_alimento = st.fk_alimento)
         // where
         $stmt = $this->db->prepare("SELECT * FROM alimentos AS a LEFT JOIN empresas AS e ON (a.fk_empresa = e.id_empresa)");
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function pegasProdutosPorPagina($limit, $offset){
+        $stmt = $this->db->prepare("SELECT * FROM alimentos AS a LEFT JOIN empresas AS e ON (a.fk_empresa = e.id_empresa) limit $limit offset $offset");
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -97,6 +111,21 @@ class Produto extends Model{
             left join area_entregador as st on (a.id_alimento = st.fk_alimento)
         where
             st.fk_entregador = :id");
+        $stmt->bindValue(":id", $this->id);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function pegaEntregaPorPagina($limite, $offset){
+        $stmt = $this->db->prepare("SELECT *
+        from 
+            alimentos as a
+            left join area_entregador as st on (a.id_alimento = st.fk_alimento)
+        where
+            st.fk_entregador = :id
+                limit $limite 
+            offset $offset");
         $stmt->bindValue(":id", $this->id);
         $stmt->execute();
 

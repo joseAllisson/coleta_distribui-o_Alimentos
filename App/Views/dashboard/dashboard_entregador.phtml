@@ -6,11 +6,11 @@
                     <h5><?= $_SESSION['email'] ?></h5>
                     <hr>
                     <div class="information ">
-                        Total de entregas :<?= count($this->view->entregas); ?>
+                        Total de entregas :<?= $this->view->total_de_produtos_ent; ?>
                     </div>
                     <hr>
                     <div class="information ">
-                        Demanda :<?= count($this->view->area); ?>
+                        Demanda :<?= $this->view->total_de_produtos; ?>
                     </div>
                 </div>
 
@@ -86,6 +86,20 @@
 
                             <?php } ?>
                         </div>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <nav aria-label="Page navigation example py-1">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="?pagina_ent=1">Primeira</a></li>
+
+                                    <?php for ($i = 1; $i <= $this->view->total_pagina_ent; $i++) { ?>
+                                        <li class="page-item <?= $this->view->pagina_ativa_ent == $i ? 'active' : '' ?>"><a class="page-link" href="?pagina_ent=<?= $i ?>"><?= $i ?></a></li>
+                                    <?php } ?>
+
+                                    <li class="page-item"><a class="page-link" href="?pagina_ent=<?= $this->view->total_pagina; ?>">Ultima</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
                     </div>
 
                     <!-- Entregas escolhidas -->
@@ -129,6 +143,20 @@
 
                             <?php } ?>
                         </div>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <nav aria-label="Page navigation example py-1">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="?pagina=1">Primeira</a></li>
+
+                                    <?php for ($i = 1; $i <= $this->view->total_pagina; $i++) { ?>
+                                        <li class="page-item <?= $this->view->pagina_ativa == $i ? 'active' : '' ?>"><a class="page-link" href="?pagina=<?= $i ?>"><?= $i ?></a></li>
+                                    <?php } ?>
+
+                                    <li class="page-item"><a class="page-link" href="?pagina=<?= $this->view->total_pagina; ?>">Ultima</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
                     </div>
                 </div>
 
@@ -148,5 +176,4 @@
             location.href = "remover_entrega?id=" + id;
         }
     }
-    
 </script>

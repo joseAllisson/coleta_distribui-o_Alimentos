@@ -19,18 +19,38 @@ class DashboardController extends Action
         $this->validaAutenticacao();
 
         if ($_SESSION['cpf'] == false) {
+            
             $produto = Container::getModel('Produto');
             $produto->id = $_SESSION['id'];
-            $this->view->empresa = $produto->pegaProdutosEmpresa();
+            $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+            $deslocamento = ($pagina - 1) * 12;
+            
+            $this->view->empresa = $produto->pegaProdutosEmpresaPorPagina(12, $deslocamento);
+
+            $this->view->total_itens = count($produto->pegaProdutosEmpresa());
+            $this->view->total_pagina = ceil($this->view->total_itens / 12); 
+            $this->view->pagina_ativa = $pagina;
 
             $this->render('dashboard_empresa', "dash_empresa");
         } else {
 
             $produto = Container::getModel('Produto');
+            $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+            $pagina_ent = isset($_GET['pagina_ent']) ? $_GET['pagina_ent'] : 1;
+            $deslocamento = ($pagina - 1) * 6;
+            $deslocamento_ent = ($pagina_ent - 1) * 6;
 
-            $this->view->entregas = $produto->pegaTodosProdutos();
+            $this->view->entregas = $produto->pegasProdutosPorPagina(6, $deslocamento_ent);
             $produto->id = $_SESSION['id'];
-            $this->view->area = $produto->area_entregador();
+            $this->view->area = $produto->pegaEntregaPorPagina(6, $deslocamento);
+            
+            $this->view->total_de_produtos_ent = count($produto->pegaTodosProdutos());
+            $this->view->total_pagina_ent = ceil($this->view->total_de_produtos_ent / 6); 
+            $this->view->total_de_produtos = count($produto->area_entregador());
+            $this->view->total_pagina = ceil($this->view->total_de_produtos / 6); 
+
+            $this->view->pagina_ativa = $pagina;
+            $this->view->pagina_ativa_ent = $pagina_ent;
             
             $this->render('dashboard_entregador', "dash_entregador");
         }
