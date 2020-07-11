@@ -13,6 +13,16 @@ class IndexController extends Action {
 		$this->render('index');
 	}
 
+	public function sobre() {
+
+		$this->render('sobre');
+	}
+
+	public function contato() {
+
+		$this->render('contato');
+	}
+
 	public function login() {
 		$this->render('login', 'login');
 	}
